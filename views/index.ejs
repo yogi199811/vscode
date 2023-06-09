@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div id="main">
+    <div id="left">
+      <h3>SastaVsCode </h3>
+      <hr>
+      <div class="row">
+        <h5>
+          <%=namefile%>
+        </h5>
+        <div id="icons">
+          <i id="filename" class="ri-file-line"></i>
+          <i id="foldername" class="ri-folder-line"></i>
+          <i class="ri-refresh-line"></i>
+
+        </div>
+      </div>
+
+      <div class="form">
+
+        <form id="fileform" action="/createfile" style="width: 100%; padding: 0px 5px; display: none  ;">
+          <input name="yogi" style="width: 100%; padding: 5px; border: 1px solid #dadada;border-radius: 5px;"
+            type="text" placeholder="file name">
+        </form>
+
+
+        <form id="folderform" action="/createfolder" style="width: 100%; padding: 0px 5px; display: none ;">
+          <input name="folder" style="width: 100%; padding: 5px; border: 1px solid #dadada;border-radius: 5px;"
+            type="text" placeholder="folder name">
+        </form>
+
+
+      </div>
+
+      <div style="margin-top: 10px;" id="files">
+        <% files.forEach(function(val){%>
+          <div class="file">
+            <div class="textf">
+              <% if(val.isFolder){ %>  
+                <i style="color:darkblue;" class="ri-folder-2-fill"></i>
+                 
+              <% } else{ %> 
+                
+                <!-- <i style="color: rgb(150, 5, 5);" class="ri-file-text-line"></i> -->
+                <i style="color: crimson;" class="ri-file-fill"></i>
+                
+              <% } %>
+              <a href="/file/<%=val.name%>"> <%= val.name %> </a>
+            </div>
+            <div class="iconsf">
+              <i class="ri-pencil-line"></i>
+              <a href="/delete/<%= val.name %>/<%=val.isFolder ?  0 : 1 %>"> <i class="ri-delete-bin-5-fill"></i> </a>
+            </div>
+
+          </div>
+
+          <% }) %>
+
+
+      </div>
+    </div>
+    <div id="right">
+      <h5>nothing here</h5>
+    </div>
+
+  </div>
+
+  <script>
+
+    function turningOff(){
+
+    document.querySelector("#filename").style.display = "none"
+    document.querySelector("#foldername").style.display= "none"
+
+
+
+    }
+
+
+
+    document.querySelector("#filename").addEventListener("click", function () {
+      document.querySelector("#fileform").style.display = "initial"
+      turningOff()
+    })
+
+    document.querySelector("#foldername").addEventListener("click", function () {
+      document.querySelector("#folderform").style.display = "initial"
+      turningOff()
+    })
+  </script>
+</body>
+
+</html>
